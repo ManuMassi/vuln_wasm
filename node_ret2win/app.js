@@ -8,16 +8,11 @@ var executeWasm;
 console.log("DEBUG");
 Module.onRuntimeInitialized = () => {
 console.log("LOADED");
+
+check_password = Module.cwrap('check_password', 'bool', ['string']);
+
 executeWasm = function executeWasm(password) {
-    const ptr = Module.allocate(
-          Module.intArrayFromString(password),
-          Module.ALLOC_NORMAL
-    );
-        
-    correct_password = Module._check_password(ptr);
-
-    Module._free(ptr);
-
+    correct_password = check_password(password);
     return correct_password
   }
 }

@@ -1,3 +1,3 @@
-emcc vuln.c -o wasm.js -s EXPORTED_FUNCTIONS="['_check_password', '_malloc', '_free']" -s EXPORTED_RUNTIME_METHODS='["UTF8ToString", "intArrayFromString", "ALLOC_NORMAL", "allocate"]';
+emcc vuln.c -o wasm.js -s EXPORTED_FUNCTIONS="['_check_password']" -s EXPORTED_RUNTIME_METHODS='["cwrap"]';
 
 python3 -m http.server

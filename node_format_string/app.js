@@ -7,19 +7,13 @@ const port = 3000
 var executeWasm;
 console.log("DEBUG");
 Module.onRuntimeInitialized = () => {
-console.log("LOADED");
-executeWasm = function executeWasm(password) {
-    const ptr = Module.allocate(
-          Module.intArrayFromString(password),
-          Module.ALLOC_NORMAL
-    );
-        
-    correct_password = Module._check_password(ptr);
+    console.log("LOADED");
 
-    Module._free(ptr);
-
-    return correct_password
-  }
+    check_password = Module.cwrap('check_password', 'int', ['string']);
+    executeWasm = function executeWasm(password) {        
+        correct_password = check_password(password);
+        return correct_password
+      }
 }
 
 // Middleware to parse URL encoded bodies

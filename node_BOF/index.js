@@ -7,15 +7,10 @@ var executeWasm;
   console.log("DEBUG");
   var result = Module.onRuntimeInitialized = () => {
   console.log("LOADED");
-  executeWasm = function executeWasm(name) {
-  const ptr = Module.allocate(
-        Module.intArrayFromString(name),
-        Module.ALLOC_NORMAL
-    );
-    //
-   Module._greetings(ptr);
+  greetings = Module.cwrap('greetings', null, ['string']);
 
-   Module._free(ptr);
+  executeWasm = function executeWasm(name) {
+    greetings(name);
    }
    }
    
@@ -24,7 +19,7 @@ app.get('/', (req, res) => {
 // exploit AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAconst { execSync } = require('child_process');console.log(execSync('ls').toString());//
   let name = req.query.name
   if (name == undefined) {
-	res.send("Insert your name");
+	  res.send("Insert your name");
   }
   executeWasm(name);
   res.send("Thank you for sending us your name"); 

@@ -12,3 +12,5 @@ The following vulnerabilities are implemented:
 - Use After Free Heap vulnerability, server-side.
 - Integer Overflow
 - Arbitrary Array Access
+
+All tests were conducted on emscripten 4.0.10

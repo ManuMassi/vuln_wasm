@@ -14,8 +14,6 @@ bool user_panel(){
 }
 
 
-
-
 EMSCRIPTEN_KEEPALIVE
 bool check_password(char* input){
     bool (* login_handler)(void);
@@ -28,8 +26,6 @@ bool check_password(char* input){
             login_handler = (bool (*)(void))&admin_panel;
         else
             login_handler = (bool (*)(void))&user_panel;
-            
-            
     }
 
     return login_handler();

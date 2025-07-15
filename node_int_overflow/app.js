@@ -6,18 +6,15 @@ const port = 3000;
 
 console.log("DEBUG");
 Module.onRuntimeInitialized = () => {
-console.log("LOADED");
+    console.log("LOADED");
 
 
-get_array_element = Module.cwrap('get_array_element', 'string', ['int'])
-
-
+    get_array_element = Module.cwrap('get_array_element', 'string', ['int'])
 }
 
 
 // Middleware to parse URL encoded bodies
 app.use(express.urlencoded({ extended: true }));
-
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
@@ -42,8 +39,6 @@ app.post('/index', (req, res) => {
     else{
         res.send("<h2>Please send an index</h2>")
     }
-
-    
     
 });
 

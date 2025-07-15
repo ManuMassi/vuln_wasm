@@ -1,15 +1,9 @@
+// Import the greetings function from the WebAssembly module
+greetings = Module.cwrap('greetings', null, ['string']);
+
 function displayGreeting() {
     // Get the value entered in the input field
     var name = document.getElementById("name").value;
-
-    // Allocate the new value inside the module
-    const ptr = Module.allocate(
-        Module.intArrayFromString(name),
-        Module.ALLOC_NORMAL
-    );
     
-    
-    Module._greetings(ptr);
-
-    Module._free(ptr);
+    greetings(name);
 }
